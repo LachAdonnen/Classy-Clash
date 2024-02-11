@@ -2,14 +2,10 @@
 #include "raylib.h"
 #include "raymath.h"
 
-Character::Character()
+Character::Character(int screenWidth, int screenHeight)
 {
     spriteWidth = (float)texture.width / spriteMaxFrames;
     spriteHeight = (float)texture.height;
-}
-
-void Character::setScreenPosition(int screenWidth, int screenHeight)
-{
     screenPosition =
         {
             (screenWidth / 2.f) - (spriteScale * (texture.width / spriteMaxFrames) / 2.f),

@@ -14,8 +14,7 @@ int main()
     Vector2 mapPosition = {0.0f, 0.0f};
     const float mapScale{4.f};
 
-    Character player{};
-    player.setScreenPosition(screenWidth, screenHeight);
+    Character player{screenWidth, screenHeight};
 
     while (!WindowShouldClose())
     {

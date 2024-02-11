@@ -4,9 +4,8 @@
 class Character
 {
 public:
-    Character();
+    Character(int screenWidth, int screenHeight);
     Vector2 getWorldPosition() { return worldPosition; }
-    void setScreenPosition(int screenWidth, int screenHeight);
     void tick(float dT);
     void undoMovement();
 
