@@ -21,6 +21,7 @@ int main()
         screenWidth / 2.0f - (playerSpriteScale * 0.5f * playerSpriteWidth),
         screenHeight / 2.0f - (playerSpriteScale * 0.5f * ((float)playerTexture.height))
     };
+    float playerRightLeft = 1.0f; // Positive for right, negative for left
 
     while (!WindowShouldClose())
     {
@@ -35,6 +36,7 @@ int main()
         if (Vector2Length(direction) != 0) 
         {
             mapPosition = Vector2Subtract(mapPosition, Vector2Scale(Vector2Normalize(direction), moveSpeed));
+            playerRightLeft = direction.x >= 0 ? 1.0f : -1.0f;
         }
 
         // Draw your game here
@@ -44,7 +46,7 @@ int main()
             {
                 0, 
                 0, 
-                playerSpriteWidth, 
+                playerRightLeft * playerSpriteWidth, 
                 (float)playerTexture.height
             },
             {
