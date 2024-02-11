@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Character.h"
+#include "Prop.h"
 
 int main()
 {
@@ -15,6 +16,8 @@ int main()
     const float mapScale{4.f};
 
     Character player{screenWidth, screenHeight};
+
+    Prop rock{{}, LoadTexture("nature_tileset/Rock.png")};
 
     while (!WindowShouldClose())
     {
@@ -34,6 +37,8 @@ int main()
         {
             player.undoMovement();
         }
+
+        rock.Render(player.getWorldPosition());
 
         EndDrawing();
     }
