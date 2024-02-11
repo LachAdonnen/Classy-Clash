@@ -12,6 +12,7 @@ int main()
 
     Texture2D background = LoadTexture("nature_tileset/World Map.png");
     Vector2 mapPosition = {0.0f, 0.0f};
+    const float mapScale{4.f};
 
     Character player{};
     player.setScreenPosition(screenWidth, screenHeight);
@@ -23,7 +24,7 @@ int main()
 
         // Draw your game here
         mapPosition = Vector2Scale(player.getWorldPosition(), -1.f);
-        DrawTextureEx(background, mapPosition, 0, 4, WHITE);
+        DrawTextureEx(background, mapPosition, 0, mapScale, WHITE);
 
         player.tick(GetFrameTime());
 
