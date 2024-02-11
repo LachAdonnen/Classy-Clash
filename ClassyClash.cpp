@@ -22,11 +22,16 @@ int main()
         screenHeight / 2.0f - (playerSpriteScale * 0.5f * ((float)playerTexture.height))
     };
     float playerRightLeft = 1.0f; // Positive for right, negative for left
+    int playerSpriteCurrentFrame = 0;
+    float playerSpriteRunningTime = 0.0f;
+    const float playerSpriteUpdateTime = 1.0f / 12.0f;
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(WHITE);
+
+        const float dT = GetFrameTime();
 
         Vector2 direction = {0.0f, 0.0f};
         if (IsKeyDown(KEY_A)) direction.x -= 1.0;
@@ -41,10 +46,19 @@ int main()
 
         // Draw your game here
         DrawTextureEx(background, mapPosition, 0, 4, WHITE);
+
+        playerSpriteRunningTime += dT;
+        if (playerSpriteRunningTime >= playerSpriteUpdateTime)
+        {
+            playerSpriteRunningTime = 0.0f;
+            playerSpriteCurrentFrame++;
+            if (playerSpriteCurrentFrame >= playerSpriteCount) playerSpriteCurrentFrame = 0;
+        }
+
         DrawTexturePro(
             playerTexture, 
             {
-                0, 
+                playerSpriteCurrentFrame * playerSpriteWidth, 
                 0, 
                 playerRightLeft * playerSpriteWidth, 
                 (float)playerTexture.height
