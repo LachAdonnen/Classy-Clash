@@ -10,6 +10,5 @@ private:
     // Private members and functions
     Vector2 worldPosition;
     Texture2D texture;
-    Vector2 screenPosition;
     float scale{4.f};
 };
