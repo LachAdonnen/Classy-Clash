@@ -28,6 +28,14 @@ int main()
 
         player.tick(GetFrameTime());
 
+        if (player.getWorldPosition().x < 0.f ||
+            player.getWorldPosition().x > ((background.width * mapScale) - screenWidth) ||
+            player.getWorldPosition().y < 0.f ||
+            player.getWorldPosition().y > ((background.height * mapScale) - screenHeight))
+        {
+            player.undoMovement();
+        }
+
         EndDrawing();
     }
 
