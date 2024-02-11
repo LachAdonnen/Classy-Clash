@@ -13,7 +13,9 @@ int main()
     Vector2 mapPosition = {0.0f, 0.0f};
     float moveSpeed = 4.0f;
 
-    Texture2D playerTexture = LoadTexture("characters/knight_idle_spritesheet.png");
+    Texture2D playerTextureIdle = LoadTexture("characters/knight_idle_spritesheet.png");
+    Texture2D playerTextureRun = LoadTexture("characters/knight_run_spritesheet.png");
+    Texture2D playerTexture = playerTextureIdle;
     const int playerSpriteCount = 6;
     const float playerSpriteWidth = (float)(playerTexture.width / playerSpriteCount);
     float playerSpriteScale = 4.0f;
@@ -42,7 +44,9 @@ int main()
         {
             mapPosition = Vector2Subtract(mapPosition, Vector2Scale(Vector2Normalize(direction), moveSpeed));
             playerRightLeft = direction.x >= 0 ? 1.0f : -1.0f;
+            playerTexture = playerTextureRun;
         }
+        else playerTexture = playerTextureIdle;
 
         // Draw your game here
         DrawTextureEx(background, mapPosition, 0, 4, WHITE);
