@@ -42,7 +42,14 @@ int main()
         }
 
         for (auto prop : props)
+        {
+            if (CheckCollisionRecs(player.GetCollisionRec(), prop.getCollisionRec(player.getWorldPosition())))
+            {
+                player.undoMovement();
+            
+            }
             prop.Render(player.getWorldPosition());
+        }
 
         EndDrawing();
     }
