@@ -4,6 +4,7 @@ class Prop {
 public:
     // Public members and functions
     Prop(Vector2 worldPosition, Texture2D sourceTexture);
+    void Render(Vector2 playerPostion);
 private:
     // Private members and functions
     Vector2 worldPosition;
