@@ -17,7 +17,10 @@ int main()
 
     Character player{screenWidth, screenHeight};
 
-    Prop rock{{}, LoadTexture("nature_tileset/Rock.png")};
+    Prop props[2] {
+        Prop{{600.f, 200.f}, LoadTexture("nature_tileset/Rock.png")},
+        Prop{{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+    };
 
     while (!WindowShouldClose())
     {
@@ -38,7 +41,8 @@ int main()
             player.undoMovement();
         }
 
-        rock.Render(player.getWorldPosition());
+        for (auto prop : props)
+            prop.Render(player.getWorldPosition());
 
         EndDrawing();
     }
