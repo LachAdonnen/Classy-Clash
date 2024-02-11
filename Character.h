@@ -8,6 +8,7 @@ public:
     Vector2 getWorldPosition() { return worldPosition; }
     void setScreenPosition(int screenWidth, int screenHeight);
     void tick(float dT);
+    void undoMovement();
 
 private:
     Texture2D textureIdle{LoadTexture("characters/knight_idle_spritesheet.png")};
@@ -20,6 +21,7 @@ private:
 
     Vector2 screenPosition{};
     Vector2 worldPosition{};
+    Vector2 worldPositionLastFrame{};
     float moveSpeed{4.f};
 
     float rightLeft{1.f};

@@ -18,6 +18,8 @@ void Character::setScreenPosition(int screenWidth, int screenHeight)
 
 void Character::tick(float dT)
 {
+    worldPositionLastFrame = worldPosition;
+
     Vector2 direction = {0.0f, 0.0f};
     if (IsKeyDown(KEY_A))
         direction.x -= 1.0;
@@ -58,4 +60,9 @@ void Character::tick(float dT)
         {0, 0},
         spriteScale,
         WHITE);
+}
+
+void Character::undoMovement()
+{
+    worldPosition = worldPositionLastFrame;
 }
