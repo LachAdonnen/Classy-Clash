@@ -4,8 +4,8 @@
 
 Character::Character(int screenWidth, int screenHeight)
 {
-    spriteWidth = (float)texture.width / spriteMaxFrames;
-    spriteHeight = (float)texture.height;
+    spriteWidth = static_cast<float>(texture.width) / spriteMaxFrames;
+    spriteHeight = static_cast<float>(texture.height);
     screenPosition =
         {
             (screenWidth / 2.f) - (spriteScale * (texture.width / spriteMaxFrames) / 2.f),
