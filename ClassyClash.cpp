@@ -13,6 +13,15 @@ int main()
     Vector2 mapPosition = {0.0f, 0.0f};
     float moveSpeed = 4.0f;
 
+    Texture2D playerTexture = LoadTexture("characters/knight_idle_spritesheet.png");
+    const int playerSpriteCount = 6;
+    const float playerSpriteWidth = (float)(playerTexture.width / playerSpriteCount);
+    float playerSpriteScale = 4.0f;
+    Vector2 playerPosition = {
+        screenWidth / 2.0f - (playerSpriteScale * 0.5f * playerSpriteWidth),
+        screenHeight / 2.0f - (playerSpriteScale * 0.5f * ((float)playerTexture.height))
+    };
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -30,6 +39,24 @@ int main()
 
         // Draw your game here
         DrawTextureEx(background, mapPosition, 0, 4, WHITE);
+        DrawTexturePro(
+            playerTexture, 
+            {
+                0, 
+                0, 
+                playerSpriteWidth, 
+                (float)playerTexture.height
+            },
+            {
+                playerPosition.x, 
+                playerPosition.y, 
+                playerSpriteScale * playerSpriteWidth, 
+                playerSpriteScale * (float)playerTexture.height
+            },
+            {0, 0}, 
+            playerSpriteScale, 
+            WHITE
+        );
 
         EndDrawing();
     }
