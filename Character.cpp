@@ -2,14 +2,10 @@
 #include "raylib.h"
 #include "raymath.h"
 
-Character::Character()
+Character::Character(int screenWidth, int screenHeight)
 {
-    spriteWidth = (float)texture.width / spriteMaxFrames;
-    spriteHeight = (float)texture.height;
-}
-
-void Character::setScreenPosition(int screenWidth, int screenHeight)
-{
+    spriteWidth = static_cast<float>(texture.width) / spriteMaxFrames;
+    spriteHeight = static_cast<float>(texture.height);
     screenPosition =
         {
             (screenWidth / 2.f) - (spriteScale * (texture.width / spriteMaxFrames) / 2.f),
@@ -18,6 +14,8 @@ void Character::setScreenPosition(int screenWidth, int screenHeight)
 
 void Character::tick(float dT)
 {
+    worldPositionLastFrame = worldPosition;
+
     Vector2 direction = {0.0f, 0.0f};
     if (IsKeyDown(KEY_A))
         direction.x -= 1.0;
@@ -58,4 +56,18 @@ void Character::tick(float dT)
         {0, 0},
         spriteScale,
         WHITE);
+}
+
+void Character::undoMovement()
+{
+    worldPosition = worldPositionLastFrame;
+}
+
+Rectangle Character::GetCollisionRec()
+{
+    return {
+        screenPosition.x,
+        screenPosition.y,
+        spriteWidth * spriteScale,
+        spriteHeight * spriteScale};
 }

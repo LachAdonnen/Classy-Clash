@@ -4,11 +4,11 @@
 class Character
 {
 public:
-    Character();
+    Character(int screenWidth, int screenHeight);
     Vector2 getWorldPosition() { return worldPosition; }
-    void setScreenPosition(int screenWidth, int screenHeight);
     void tick(float dT);
-
+    void undoMovement();
+    Rectangle GetCollisionRec();
 private:
     Texture2D textureIdle{LoadTexture("characters/knight_idle_spritesheet.png")};
     Texture2D textureRun{LoadTexture("characters/knight_run_spritesheet.png")};
@@ -20,6 +20,7 @@ private:
 
     Vector2 screenPosition{};
     Vector2 worldPosition{};
+    Vector2 worldPositionLastFrame{};
     float moveSpeed{4.f};
 
     float rightLeft{1.f};
