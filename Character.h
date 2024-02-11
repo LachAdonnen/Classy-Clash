@@ -8,7 +8,7 @@ public:
     Vector2 getWorldPosition() { return worldPosition; }
     void tick(float dT);
     void undoMovement();
-
+    Rectangle GetCollisionRec();
 private:
     Texture2D textureIdle{LoadTexture("characters/knight_idle_spritesheet.png")};
     Texture2D textureRun{LoadTexture("characters/knight_run_spritesheet.png")};
