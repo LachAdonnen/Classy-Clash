@@ -2,11 +2,11 @@
 #include "raylib.h"
 #include "raymath.h"
 
-Enemy::Enemy(Vector2 i_worldPosition, Texture2D i_textureIdle, Texture2D i_textureRun)
+Enemy::Enemy(Vector2 worldPosition, Texture2D textureIdle, Texture2D textureRun)
 {
-    worldPosition = i_worldPosition;
-    textureIdle = i_textureIdle;
-    textureRun = i_textureRun;
+    Enemy::worldPosition = worldPosition;
+    Enemy::textureIdle = textureIdle;
+    Enemy::textureRun = textureRun;
     texture = textureIdle;
     spriteWidth = static_cast<float>(texture.width) / spriteMaxFrames;
     spriteHeight = static_cast<float>(texture.height);
@@ -15,4 +15,9 @@ Enemy::Enemy(Vector2 i_worldPosition, Texture2D i_textureIdle, Texture2D i_textu
 void Enemy::tick(float dT)
 {
     BaseCharacter::tick(dT);
+}
+
+void Enemy::setTarget(Character* target)
+{
+    Enemy::target = target;
 }

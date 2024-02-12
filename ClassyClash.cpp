@@ -23,6 +23,7 @@ int main()
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png")
     };
+    goblin.setTarget(&player);
 
     Prop props[2] {
         Prop{{600.f, 200.f}, LoadTexture("nature_tileset/Rock.png")},
