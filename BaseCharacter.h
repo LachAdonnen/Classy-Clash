@@ -8,7 +8,7 @@ class BaseCharacter
 public:
     BaseCharacter();
     Vector2 getWorldPosition() { return worldPosition; }
-    Vector2 getScreenPosition() { return screenPosition; }
+    virtual Vector2 getScreenPosition() = 0;
     virtual void tick(float dT);
     void undoMovement();
     Rectangle GetCollisionRec();
@@ -21,7 +21,6 @@ protected:
     float spriteHeight{};
     float spriteScale{4.f};
 
-    Vector2 screenPosition{};
     Vector2 worldPosition{};
     Vector2 worldPositionLastFrame{};
     float moveSpeed{4.f};
@@ -30,6 +29,7 @@ protected:
     int spriteCurrentFrame{0};
     float spriteRunningTime{0.f};
     float spriteUpdateTime{1.f / 12.f};
+    Vector2 velocity{};
 private:
 };
 

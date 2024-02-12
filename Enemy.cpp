@@ -13,11 +13,14 @@ Enemy::Enemy(Vector2 worldPosition, Texture2D textureIdle, Texture2D textureRun)
     moveSpeed = 3.5f;
 }
 
+Vector2 Enemy::getScreenPosition()
+{
+    return Vector2Subtract(worldPosition, target->getWorldPosition());
+}
+
 void Enemy::tick(float dT)
 {
-    Vector2 toTargetDirection = Vector2Normalize(Vector2Subtract(target->getScreenPosition(), screenPosition));
-    worldPosition = Vector2Add(worldPosition, Vector2Scale(toTargetDirection, moveSpeed));
-    screenPosition = Vector2Subtract(worldPosition, target->getWorldPosition());
+    velocity = Vector2Subtract(target->getScreenPosition(), getScreenPosition());
     BaseCharacter::tick(dT);
 }
 

@@ -1,4 +1,6 @@
 #include "BaseCharacter.h"
+#include "raylib.h"
+#include "raymath.h"
 
 BaseCharacter::BaseCharacter()
 {
@@ -18,14 +20,24 @@ void BaseCharacter::tick(float dT)
             spriteCurrentFrame = 0;
     }
 
+    if (Vector2Length(velocity) != 0)
+    {
+        worldPosition = Vector2Add(worldPosition, Vector2Scale(Vector2Normalize(velocity), moveSpeed));
+        rightLeft = velocity.x >= 0 ? 1.f : -1.f;
+        texture = textureRun;
+    }
+    else
+        texture = textureIdle;
+    velocity = {};
+
     DrawTexturePro(
         texture,
         {spriteCurrentFrame * spriteWidth,
          0,
          rightLeft * spriteWidth,
          spriteHeight},
-        {screenPosition.x,
-         screenPosition.y,
+        {getScreenPosition().x,
+         getScreenPosition().y,
          spriteScale * spriteWidth,
          spriteScale * spriteHeight},
         {0, 0},
@@ -41,8 +53,8 @@ void BaseCharacter::undoMovement()
 Rectangle BaseCharacter::GetCollisionRec()
 {
     return {
-        screenPosition.x,
-        screenPosition.y,
+        getScreenPosition().x,
+        getScreenPosition().y,
         spriteWidth * spriteScale,
         spriteHeight * spriteScale};
 }

@@ -10,7 +10,10 @@ class Character : public BaseCharacter
 public:
     Character(int screenWidth, int screenHeight);
     virtual void tick(float dT) override;
+    virtual Vector2 getScreenPosition() override;
 private:
+    int screenWidth{};
+    int screenHeight{};
 };
 
 #endif // !CHARACTER_H
