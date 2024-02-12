@@ -19,12 +19,29 @@ int main()
 
     Character player{screenWidth, screenHeight};
 
-    Enemy goblin {
+    Texture2D idleTexture = LoadTexture("characters/goblin_idle_spritesheet.png");
+    Texture2D runTexture = LoadTexture("characters/goblin_run_spritesheet.png");
+
+    Vector2 positions[5] {
         {400.f, 400.f},
-        LoadTexture("characters/goblin_idle_spritesheet.png"),
-        LoadTexture("characters/goblin_run_spritesheet.png")
+        {600.f, 600.f},
+        {800.f, 800.f},
+        {1000.f, 1000.f},
+        {1200.f, 1200.f}
     };
-    goblin.setTarget(&player);
+
+    Enemy* enemies[5] {
+        new Enemy{positions[0], idleTexture, runTexture},
+        new Enemy{positions[1], idleTexture, runTexture},
+        new Enemy{positions[2], idleTexture, runTexture},
+        new Enemy{positions[3], idleTexture, runTexture},
+        new Enemy{positions[4], idleTexture, runTexture}
+    };
+
+    for (auto enemy : enemies)
+    {
+        enemy->setTarget(&player);
+    }
 
     Prop props[2] {
         Prop{{600.f, 200.f}, LoadTexture("nature_tileset/Rock.png")},
@@ -59,10 +76,15 @@ int main()
             }
             prop.Render(player.getWorldPosition());
         }
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && 
-            CheckCollisionRecs(player.GetWeaponCollisionRec(), goblin.GetCollisionRec()))
-        {
-            goblin.setAlive(false);
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        { 
+            for (auto enemy : enemies)
+            {
+                if (CheckCollisionRecs(player.GetWeaponCollisionRec(), enemy->GetCollisionRec()))
+                {
+                    enemy->setAlive(false);
+                }
+            }
         }
 
         if (!player.isAlive())
@@ -77,8 +99,9 @@ int main()
             health.append(std::to_string(player.getHealth()), 0, 5);
             DrawText(health.c_str(), 55.f, 45.f, 40, RED);
         }
-        
-        goblin.tick(GetFrameTime());
+
+        for (auto enemy : enemies)
+            enemy->tick(GetFrameTime());
 
         EndDrawing();
     }

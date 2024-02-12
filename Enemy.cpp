@@ -24,6 +24,8 @@ void Enemy::tick(float dT)
         return;
 
     velocity = Vector2Subtract(target->getScreenPosition(), getScreenPosition());
+    if (Vector2Length(velocity) < radius)
+        velocity = {};
 
     BaseCharacter::tick(dT);
 
