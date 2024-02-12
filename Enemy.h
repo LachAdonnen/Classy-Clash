@@ -11,4 +11,6 @@ public:
     virtual Vector2 getScreenPosition() override;
 private:
     Character* target;
+    float damgePerSecond{10.f};
+    float radius{25.f};
 };
