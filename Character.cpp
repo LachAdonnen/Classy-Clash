@@ -16,7 +16,7 @@ Character::Character(int screenWidth, int screenHeight)
 Vector2 Character::getScreenPosition()
 {
     return {(screenWidth / 2.f) - (spriteScale * (texture.width / spriteMaxFrames) / 2.f),
-           (screenHeight / 2.f) - (spriteScale * (texture.height) / 2.f)};
+            (screenHeight / 2.f) - (spriteScale * (texture.height) / 2.f)};
 }
 
 void Character::tick(float dT)
@@ -29,6 +29,45 @@ void Character::tick(float dT)
         velocity.y -= 1.0;
     if (IsKeyDown(KEY_S))
         velocity.y += 1.0;
-    
+
     BaseCharacter::tick(dT);
+
+    Vector2 origin{};
+    Vector2 offset{};
+    float rotation{};
+    if (rightLeft > 0.f)
+    {
+        origin = {0.f, weapon.height * spriteScale};
+        offset = {35.f, 55.f};
+        rotation = 35.f;
+        weaponCollisionRec =
+            {
+                getScreenPosition().x + offset.x,
+                getScreenPosition().y + offset.y - (weapon.height * spriteScale),
+                spriteScale * weapon.width,
+                spriteScale * weapon.height};
+    }
+    else
+    {
+        origin = {weapon.width * spriteScale, weapon.height * spriteScale};
+        offset = {25.f, 55.f};
+        rotation = -35.f;
+        weaponCollisionRec =
+            {
+                getScreenPosition().x + offset.x - (weapon.width * spriteScale),
+                getScreenPosition().y + offset.y - (weapon.height * spriteScale),
+                spriteScale * weapon.width,
+                spriteScale * weapon.height};
+    }
+
+    Rectangle source{0.f, 0.f, static_cast<float>(weapon.width) * rightLeft, static_cast<float>(weapon.height)};
+    Rectangle destination{getScreenPosition().x + offset.x, getScreenPosition().y + offset.y, spriteScale * weapon.width, spriteScale * weapon.height};
+    DrawTexturePro(weapon, source, destination, origin, rotation, WHITE);
+
+    DrawRectangleLines(
+        weaponCollisionRec.x,
+        weaponCollisionRec.y,
+        weaponCollisionRec.width,
+        weaponCollisionRec.height,
+        RED);
 }
