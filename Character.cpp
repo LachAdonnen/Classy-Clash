@@ -17,7 +17,7 @@ Character::Character(int screenWidth, int screenHeight)
 
 void Character::tick(float dT)
 {
-    worldPositionLastFrame = worldPosition;
+    BaseCharacter::tick(dT);
 
     Vector2 direction = {0.0f, 0.0f};
     if (IsKeyDown(KEY_A))
@@ -36,27 +36,4 @@ void Character::tick(float dT)
     }
     else
         texture = textureIdle;
-
-    spriteRunningTime += dT;
-    if (spriteRunningTime >= spriteUpdateTime)
-    {
-        spriteRunningTime = 0.0f;
-        spriteCurrentFrame++;
-        if (spriteCurrentFrame >= spriteMaxFrames)
-            spriteCurrentFrame = 0;
-    }
-
-    DrawTexturePro(
-        texture,
-        {spriteCurrentFrame * spriteWidth,
-         0,
-         rightLeft * spriteWidth,
-         spriteHeight},
-        {screenPosition.x,
-         screenPosition.y,
-         spriteScale * spriteWidth,
-         spriteScale * spriteHeight},
-        {0, 0},
-        spriteScale,
-        WHITE);
 }

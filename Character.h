@@ -6,6 +6,6 @@ class Character : public BaseCharacter
 {
 public:
     Character(int screenWidth, int screenHeight);
-    void tick(float dT);
+    virtual void tick(float dT) override;
 private:
 };
