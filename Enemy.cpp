@@ -2,11 +2,11 @@
 #include "raylib.h"
 #include "raymath.h"
 
-Enemy::Enemy(Vector2 worldPosition, Texture2D textureIdle, Texture2D textureRun) 
-    : worldPosition(worldPosition),
-      textureIdle(textureIdle),
-      textureRun(textureRun)
+Enemy::Enemy(Vector2 i_worldPosition, Texture2D i_textureIdle, Texture2D i_textureRun)
 {
+    worldPosition = i_worldPosition;
+    textureIdle = i_textureIdle;
+    textureRun = i_textureRun;
     texture = textureIdle;
     spriteWidth = static_cast<float>(texture.width) / spriteMaxFrames;
     spriteHeight = static_cast<float>(texture.height);
@@ -56,18 +56,4 @@ void Enemy::tick(float dT)
         {0, 0},
         spriteScale,
         WHITE);
-}
-
-void Enemy::undoMovement()
-{
-    worldPosition = worldPositionLastFrame;
-}
-
-Rectangle Enemy::GetCollisionRec()
-{
-    return {
-        screenPosition.x,
-        screenPosition.y,
-        spriteWidth * spriteScale,
-        spriteHeight * spriteScale};
 }

@@ -4,6 +4,9 @@
 
 Character::Character(int screenWidth, int screenHeight)
 {
+    textureIdle = LoadTexture("characters/knight_idle_spritesheet.png");
+    textureRun = LoadTexture("characters/knight_run_spritesheet.png");
+    texture = textureIdle;
     spriteWidth = static_cast<float>(texture.width) / spriteMaxFrames;
     spriteHeight = static_cast<float>(texture.height);
     screenPosition =
@@ -56,18 +59,4 @@ void Character::tick(float dT)
         {0, 0},
         spriteScale,
         WHITE);
-}
-
-void Character::undoMovement()
-{
-    worldPosition = worldPositionLastFrame;
-}
-
-Rectangle Character::GetCollisionRec()
-{
-    return {
-        screenPosition.x,
-        screenPosition.y,
-        spriteWidth * spriteScale,
-        spriteHeight * spriteScale};
 }
