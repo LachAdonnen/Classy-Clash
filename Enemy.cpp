@@ -14,6 +14,7 @@ Enemy::Enemy(Vector2 worldPosition, Texture2D textureIdle, Texture2D textureRun)
 
 void Enemy::tick(float dT)
 {
+    screenPosition = Vector2Subtract(worldPosition, target->getWorldPosition());
     BaseCharacter::tick(dT);
 }
 
