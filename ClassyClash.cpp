@@ -2,6 +2,7 @@
 #include "raymath.h"
 #include "Character.h"
 #include "Prop.h"
+#include "Enemy.h"
 
 int main()
 {
@@ -16,6 +17,12 @@ int main()
     const float mapScale{4.f};
 
     Character player{screenWidth, screenHeight};
+
+    Enemy goblin {
+        {200.f, 200.f},
+        LoadTexture("characters/goblin_idle_spritesheet.png"),
+        LoadTexture("characters/goblin_run_spritesheet.png")
+    };
 
     Prop props[2] {
         Prop{{600.f, 200.f}, LoadTexture("nature_tileset/Rock.png")},
@@ -50,6 +57,8 @@ int main()
             }
             prop.Render(player.getWorldPosition());
         }
+        
+        goblin.tick(GetFrameTime());
 
         EndDrawing();
     }
