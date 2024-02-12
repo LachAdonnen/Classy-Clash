@@ -12,6 +12,8 @@ public:
     virtual void tick(float dT);
     void undoMovement();
     Rectangle GetCollisionRec();
+    bool isAlive() { return alive; }
+    void setAlive(bool isAlive) { alive = isAlive; }
 protected:
     Texture2D textureIdle;
     Texture2D textureRun;
@@ -31,6 +33,7 @@ protected:
     float spriteUpdateTime{1.f / 12.f};
     Vector2 velocity{};
 private:
+    bool alive{true};
 };
 
 #endif // !BASE_CHARACTER_H

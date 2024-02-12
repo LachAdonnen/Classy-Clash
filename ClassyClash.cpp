@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Prop.h"
 #include "Enemy.h"
+#include <string>
 
 int main()
 {
@@ -19,7 +20,7 @@ int main()
     Character player{screenWidth, screenHeight};
 
     Enemy goblin {
-        {200.f, 200.f},
+        {400.f, 400.f},
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png")
     };
@@ -57,6 +58,24 @@ int main()
             
             }
             prop.Render(player.getWorldPosition());
+        }
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && 
+            CheckCollisionRecs(player.GetWeaponCollisionRec(), goblin.GetCollisionRec()))
+        {
+            goblin.setAlive(false);
+        }
+
+        if (!player.isAlive())
+        {
+            DrawText("Game Over", 55.f, 45.f, 40, RED);
+            EndDrawing();
+            continue;
+        }
+        else
+        {
+            std::string health = "Health: ";
+            health.append(std::to_string(player.getHealth()), 0, 5);
+            DrawText(health.c_str(), 55.f, 45.f, 40, RED);
         }
         
         goblin.tick(GetFrameTime());

@@ -20,8 +20,15 @@ Vector2 Enemy::getScreenPosition()
 
 void Enemy::tick(float dT)
 {
+    if (!isAlive())
+        return;
+
     velocity = Vector2Subtract(target->getScreenPosition(), getScreenPosition());
+
     BaseCharacter::tick(dT);
+
+    if (CheckCollisionRecs(GetCollisionRec(), target->GetCollisionRec()))
+        target->takeDamage(damgePerSecond * dT);
 }
 
 void Enemy::setTarget(Character* target)

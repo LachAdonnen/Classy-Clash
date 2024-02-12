@@ -21,6 +21,9 @@ Vector2 Character::getScreenPosition()
 
 void Character::tick(float dT)
 {
+    if (!isAlive())
+        return;
+
     if (IsKeyDown(KEY_A))
         velocity.x -= 1.0;
     if (IsKeyDown(KEY_D))
@@ -39,7 +42,8 @@ void Character::tick(float dT)
     {
         origin = {0.f, weapon.height * spriteScale};
         offset = {35.f, 55.f};
-        rotation = 35.f;
+        
+        rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? 35.f : 0.f;
         weaponCollisionRec =
             {
                 getScreenPosition().x + offset.x,
@@ -51,7 +55,7 @@ void Character::tick(float dT)
     {
         origin = {weapon.width * spriteScale, weapon.height * spriteScale};
         offset = {25.f, 55.f};
-        rotation = -35.f;
+        rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? -35.f : 0.f;
         weaponCollisionRec =
             {
                 getScreenPosition().x + offset.x - (weapon.width * spriteScale),
@@ -70,4 +74,11 @@ void Character::tick(float dT)
         weaponCollisionRec.width,
         weaponCollisionRec.height,
         RED);
+}
+
+void Character::takeDamage(float damage)
+{
+    heatlh -= damage;
+    if (heatlh <= 0.f)
+        setAlive(false);
 }
