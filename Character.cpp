@@ -67,13 +67,6 @@ void Character::tick(float dT)
     Rectangle source{0.f, 0.f, static_cast<float>(weapon.width) * rightLeft, static_cast<float>(weapon.height)};
     Rectangle destination{getScreenPosition().x + offset.x, getScreenPosition().y + offset.y, spriteScale * weapon.width, spriteScale * weapon.height};
     DrawTexturePro(weapon, source, destination, origin, rotation, WHITE);
-
-    DrawRectangleLines(
-        weaponCollisionRec.x,
-        weaponCollisionRec.y,
-        weaponCollisionRec.width,
-        weaponCollisionRec.height,
-        RED);
 }
 
 void Character::takeDamage(float damage)
