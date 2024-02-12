@@ -1,6 +1,7 @@
 #include "raylib.h"
+#include "BaseCharacter.h"
 
-class Enemy
+class Enemy : public BaseCharacter
 {
 public:
     Enemy(Vector2 worldPosition, Texture2D idleTexture , Texture2D runTexture);
